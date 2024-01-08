@@ -5,9 +5,11 @@ export const SignUpForm=({setToken})=>{
     const [password, setPassword] =useState('')
     const [error,setError] =useState(null)
     const [valid,setValid] =useState('')
-
+    const [submit,setSubmit] =useState('')
 
     const handleSubmit=async(event)=>{
+      setValid('')
+      setSubmit('')
         event.preventDefault();
 
          if(username.length<8){
@@ -33,6 +35,7 @@ export const SignUpForm=({setToken})=>{
             const data=await response.json()
             console.log(data)
             setToken(data.token)
+            setSubmit('Form Submitted!')
 
         }catch(error){
             setError(error.message)
@@ -43,6 +46,7 @@ export const SignUpForm=({setToken})=>{
         <h2>Sign Up</h2>
     {error && <p>{error}</p>}
     {valid}
+      {submit}
 
     <form onSubmit={handleSubmit}>
   <label>
