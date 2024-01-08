@@ -1,13 +1,24 @@
 import { useState } from 'react'
 
-export const SignUpForm=({token, setToken})=>{
+export const SignUpForm=({setToken})=>{
     const [username, setUsername] =useState('')
     const [password, setPassword] =useState('')
     const [error,setError] =useState(null)
+    const [valid,setValid] =useState('')
 
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
+
+         if(username.length<8){
+            setValid('Username must be more than 8 characters long')
+            return
+        }
+        if(password.length<8){
+            setValid('Password must be more than 8 characters long')
+            return
+        }
+
         try{
             const postdata = {username:username,password:password};
             const response =await fetch('https://fsa-jwt-practice.herokuapp.com/signup'
@@ -27,11 +38,11 @@ export const SignUpForm=({token, setToken})=>{
             setError(error.message)
         }
       }
-
     return(
         <>
         <h2>Sign Up</h2>
     {error && <p>{error}</p>}
+    {valid}
 
     <form onSubmit={handleSubmit}>
   <label>

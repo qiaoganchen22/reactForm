@@ -1,5 +1,6 @@
 import { useState } from "react";
-export const Authenticate = ({ token, setToken }) => {
+
+export const Authenticate = ({ token }) => {
   const [successMessage, setSucessMessage] = useState(null);
 
   const handleClick = async () => {
@@ -18,7 +19,7 @@ export const Authenticate = ({ token, setToken }) => {
       setSucessMessage(data.message);
       console.log(data);
     } catch (error) {
-      setError();
+      setError(error.message);
     }
   };
 
