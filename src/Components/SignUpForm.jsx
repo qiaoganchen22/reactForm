@@ -21,7 +21,7 @@ export const SignUpForm=({token, setToken})=>{
             )
             const data=await response.json()
             console.log(data)
-            setToken=(data.token)
+            setToken(data.token)
 
         }catch(error){
             setError(error.message)
